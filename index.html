@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>document.documentElement.classList.add("js")</script>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -108,7 +109,8 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 .intro-media img{width:100%;aspect-ratio:4/4.3;object-fit:cover;border-radius:var(--r-lg)}
 .intro-media .badge{position:absolute;right:-28px;bottom:40px;background:#fff;border-radius:22px;padding:20px 24px;box-shadow:0 30px 50px -26px rgba(8,36,63,.55);display:flex;gap:16px;align-items:center;max-width:300px}
 .badge b{font-family:var(--display);font-size:46px;font-weight:800;line-height:.9;color:var(--red);letter-spacing:-.03em}
-.badge span{font-size:14.5px;line-height:1.35;color:var(--muted);font-weight:500}
+.badge b span{font:inherit;color:inherit;line-height:inherit}
+.badge>span{font-size:14.5px;line-height:1.35;color:var(--muted);font-weight:500}
 .intro h2{font-size:clamp(32px,3.6vw,52px);color:var(--navy)}
 .intro .big{font-size:20px;line-height:1.55;margin:28px 0 18px;color:var(--ink)}
 .intro p{color:var(--muted);margin:0 0 16px;max-width:60ch}
@@ -228,6 +230,86 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 
 .mbar{display:none}
 
+
+/* ===== motion ===== */
+.airflow{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.airflow svg{position:absolute;left:48%;width:62%;height:100%}
+@media (max-width:980px){.airflow svg{left:30%;width:90%;height:45%;top:8%}}
+.airflow path{fill:none;stroke-linecap:round;stroke-dasharray:180 1400;animation:drift 7s linear infinite}
+.airflow path.b{stroke:#5FB4E8;opacity:.7}
+.airflow path.r{stroke:#FF4A52;opacity:.6}
+.airflow path:nth-child(2){animation-duration:9s;animation-delay:-3s}
+.airflow path:nth-child(3){animation-duration:8s;animation-delay:-5s}
+.airflow path:nth-child(4){animation-duration:11s;animation-delay:-1s}
+@keyframes drift{from{stroke-dashoffset:1580}to{stroke-dashoffset:0}}
+.hero .wrap{z-index:2}
+.callcard a{position:relative}
+.callcard .live{display:inline-block;width:9px;height:9px;border-radius:50%;background:#4ADE80;margin-right:8px;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(74,222,128,.6)}80%,100%{box-shadow:0 0 0 12px rgba(74,222,128,0)}}
+.hdr .pill-red svg{animation:ring 3.2s ease-in-out infinite;transform-origin:50% 50%}
+@keyframes ring{0%,82%,100%{transform:rotate(0)}85%{transform:rotate(-14deg)}88%{transform:rotate(12deg)}91%{transform:rotate(-10deg)}94%{transform:rotate(8deg)}}
+.hdr.scrolled .bar{box-shadow:0 18px 50px -16px rgba(8,36,63,.6)}
+.hdr .brand img{transition:height .3s}
+.hdr.scrolled .brand img{height:50px}
+.hdr .brand{transition:height .3s}
+.hdr.scrolled .brand{height:52px}
+
+/* ticker */
+.ticker{background:var(--red);color:#fff;overflow:hidden;padding:16px 0;position:relative}
+.ticker-track{display:flex;width:max-content;animation:tick 38s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker ul{display:flex;list-style:none;margin:0;padding:0}
+.ticker li{display:flex;align-items:center;font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:-.01em;white-space:nowrap}
+.ticker li::after{content:"";width:34px;height:14px;margin:0 26px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 20'%3E%3Cpath d='M2 14c8-10 16-10 20-4s12 6 20-4' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;opacity:.8}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* facts icons */
+.facts li:hover .ic{background:var(--sky);color:var(--navy);transform:rotate(-8deg) scale(1.06)}
+.facts .ic{transition:.3s}
+
+/* scroll reveal */
+.js .rv{opacity:0;transform:translateY(38px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.rv-l{transform:translateX(-50px)}
+.js .rv.rv-r{transform:translateX(50px)}
+.js .rv.rv-s{transform:scale(.94)}
+.js .rv.in{opacity:1;transform:none}
+.js .tile.rv{transform:translateY(50px) scale(.97)}
+.js .tile.rv.in{transform:none}
+.tile .more svg{transition:transform .25s}
+.tile:hover .more svg{transform:translateX(4px)}
+
+/* clip reveal for images */
+.js .wipe{clip-path:inset(0 0 100% 0 round 28px);transition:clip-path 1.2s cubic-bezier(.7,0,.2,1)}
+.js .in .wipe{clip-path:inset(0 0 0 0 round 28px)}
+.js .wipe{transition-delay:.2s}
+.intro-media .badge{animation:bob 5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* parallax targets */
+.why-img img,.review-img img{will-change:transform}
+.why-img{overflow:hidden}
+.why-img img{height:115%;top:-7.5%}
+
+/* clean list stagger */
+.js .cleanlist li{opacity:0;transform:translateX(18px);transition:opacity .5s,transform .5s;transition-delay:calc(var(--i)*60ms)}
+.js .cleanlist.in li{opacity:1;transform:none}
+.cleanlist li::before{transition:transform .4s}
+.cleanlist li:hover::before{transform:translateX(5px)}
+
+.band-card .swirl{animation:sway 9s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-30px,14px) rotate(-4deg)}}
+.band-card .num{background:linear-gradient(90deg,#fff 40%,#FFC9CB 50%,#fff 60%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4.5s linear infinite}
+@keyframes shine{from{background-position:100% 0}to{background-position:-150% 0}}
+.info div{transition:transform .3s,box-shadow .3s}
+.info div:hover{transform:translateY(-6px);box-shadow:0 24px 40px -26px rgba(8,36,63,.5)}
+.pill{will-change:transform}
+.pill:hover{transform:translateY(-2px)}
+
+@media (prefers-reduced-motion:reduce){
+  .js .rv,.js .wipe,.js .cleanlist li{opacity:1!important;transform:none!important;clip-path:none!important}
+  .airflow{display:none}
+}
+
 @media (max-width:1180px){
   .nav>ul>li>a,.nav>ul>li>button{padding:0 11px}
   .hdr .pill span.t{display:none}
@@ -327,6 +409,12 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 
 <main>
 <section class="hero">
+  <div class="airflow" aria-hidden="true"><svg viewBox="0 0 1440 900" preserveAspectRatio="none">
+    <path class="b" stroke-width="3" d="M-50 620C200 470 380 470 520 560s330 120 520-40 330-120 450-60"/>
+    <path class="r" stroke-width="2.5" d="M-50 690C210 560 390 560 530 640s330 100 520-50 320-110 440-50"/>
+    <path class="b" stroke-width="2" d="M-50 300C240 180 420 200 560 270s330 80 520-60 330-90 450-30"/>
+    <path class="r" stroke-width="2" d="M-50 380C230 280 430 300 570 360s320 70 510-50 320-80 440-20"/>
+  </svg></div>
   <div class="hero-bg"><img src="images/technician-floor-register.jpg" alt="Technician cleaning a floor air register in a bright living room"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -339,7 +427,7 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
       </div>
     </div>
     <aside class="callcard" aria-label="Call us">
-      <p>We are only a phone call away</p>
+      <p><span class="live"></span>We are only a phone call away</p>
       <a href="tel:+17803943833">780-394-3833</a>
       <p>Call us now for a price estimate</p>
       <div class="hrs"><span>Mon to Sat</span>7:00 AM to 7:00 PM<span>Sunday</span>7:00 AM to 5:00 PM</div>
@@ -350,25 +438,27 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 <section class="facts" aria-label="Why MEPS">
   <div class="wrap">
     <ul>
-      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><strong>Over two decades</strong><span>Reliable, punctual and efficient</span></div></li>
-      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><strong>Licensed technicians</strong><span>Fully trained and professional</span></div></li>
-      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg></span><div><strong>All work in-house</strong><span>Never subcontracted</span></div></li>
-      <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg></span><div><strong>Fair prices</strong><span>100% focused on satisfaction</span></div></li>
+      <li class="rv" style="--d:0.0s"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><strong>Over two decades</strong><span>Reliable, punctual and efficient</span></div></li>
+      <li class="rv" style="--d:0.1s"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><strong>Licensed technicians</strong><span>Fully trained and professional</span></div></li>
+      <li class="rv" style="--d:0.2s"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></svg></span><div><strong>All work in-house</strong><span>Never subcontracted</span></div></li>
+      <li class="rv" style="--d:0.3s"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg></span><div><strong>Fair prices</strong><span>100% focused on satisfaction</span></div></li>
     </ul>
   </div>
 </section>
 
+<div class="ticker" aria-hidden="true"><div class="ticker-track"><ul><li>Furnace</li><li>Ducts</li><li>Fireplace</li><li>Chimney</li><li>Air conditioner</li><li>HVAC system</li><li>Dryer vent</li><li>Central vacuum</li><li>Bathroom exhaust fan</li><li>Carpet</li><li>Upholstery</li></ul><ul><li>Furnace</li><li>Ducts</li><li>Fireplace</li><li>Chimney</li><li>Air conditioner</li><li>HVAC system</li><li>Dryer vent</li><li>Central vacuum</li><li>Bathroom exhaust fan</li><li>Carpet</li><li>Upholstery</li></ul></div></div>
+
 <section class="intro">
   <div class="wrap">
-    <div class="intro-media">
-      <img src="images/techs-furnace-basement.jpg" alt="Two MEPS technicians cleaning a furnace in a basement with a duct cleaning hose">
-      <div class="badge"><b>20+</b><span>years cleaning ducts and furnaces</span></div>
+    <div class="intro-media rv rv-l">
+      <img class="wipe" src="images/techs-furnace-basement.jpg" alt="Two MEPS technicians cleaning a furnace in a basement with a duct cleaning hose">
+      <div class="badge"><b><span data-count="20">20</span>+</b><span>years cleaning ducts and furnaces</span></div>
     </div>
     <div>
-      <h2>Your ducts and furnace work hard every day</h2>
-      <p class="big">If you need a reliable company to clean your furnaces, boilers, air ducts and dryer vents in Edmonton, you can count on MEPS Air Quality.</p>
+      <h2 class="rv">Your ducts and furnace work hard every day</h2>
+      <p class="big rv" style="--d:.1s">If you need a reliable company to clean your furnaces, boilers, air ducts and dryer vents in Edmonton, you can count on MEPS Air Quality.</p>
       <p>We offer thorough cleaning services to ensure air quality in homes and commercial establishments across Alberta, British Columbia and Saskatchewan. From cleaning your HVAC systems to HVAC equipment installations, we are equipped to improve the condition of your indoors and enhance your quality of life.</p>
-      <div class="inhouse"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10"/></svg></span><p>Our own staff handle your duct and furnace cleaning. We do not subcontract to third parties.</p></div>
+      <div class="inhouse rv rv-s" style="--d:.15s"><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10"/></svg></span><p>Our own staff handle your duct and furnace cleaning. We do not subcontract to third parties.</p></div>
       <a class="textlink" href="https://www.mepsairquality.com/about">More about MEPS Air Quality</a>
     </div>
   </div>
@@ -377,42 +467,42 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 <section class="svc" id="services">
   <div class="wrap">
     <div class="svc-top">
-      <h2>What we offer</h2>
-      <p>Clean, organized surroundings have a proven positive impact on productivity and health. Our services improve your indoor air quality and keep your space clean and comfortable.</p>
+      <h2 class="rv">What we offer</h2>
+      <p class="rv" style="--d:.1s">Clean, organized surroundings have a proven positive impact on productivity and health. Our services improve your indoor air quality and keep your space clean and comfortable.</p>
     </div>
     <div class="bento">
-      <a class="tile photo t-a" href="https://www.mepsairquality.com/copy-of-dryer-vent-and-central-vac">
+      <a class="tile photo t-a rv" style="--d:0.00s" href="https://www.mepsairquality.com/copy-of-dryer-vent-and-central-vac">
         <img src="images/furnace-blower-clean.jpg" alt="Clean furnace blower and new filter inspected with a flashlight">
         <h3>Duct and furnace cleaning</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile photo t-b" href="https://www.mepsairquality.com/hvac">
+      <a class="tile photo t-b rv" style="--d:0.08s" href="https://www.mepsairquality.com/hvac">
         <img src="images/commercial-rooftop-ducts.jpg" alt="Technicians inspecting large rooftop ductwork on a commercial building">
         <h3>Commercial HVAC cleaning</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile photo t-c" href="https://www.mepsairquality.com/about-5">
+      <a class="tile photo t-c rv" style="--d:0.16s" href="https://www.mepsairquality.com/about-5">
         <img src="images/truck-vacuum-driveway.jpg" alt="Truck-mounted vacuum with hose running into a house">
         <h3>Dryer vent and central vac</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile photo t-d" href="https://www.mepsairquality.com/installations">
+      <a class="tile photo t-d rv" style="--d:0.24s" href="https://www.mepsairquality.com/installations">
         <img src="images/furnace-installation.jpg" alt="Technician installing a new furnace in a basement">
         <h3>HVAC installation</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile photo t-e" href="https://www.mepsairquality.com/carpet-upholstery-cleaning">
+      <a class="tile photo t-e rv" style="--d:0.32s" href="https://www.mepsairquality.com/carpet-upholstery-cleaning">
         <img src="images/carpet-steam-cleaning.jpg" alt="Technician steam cleaning a living room carpet">
         <h3>Carpet and upholstery cleaning</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile photo t-f" href="https://www.mepsairquality.com/housekeeping">
+      <a class="tile photo t-f rv" style="--d:0.40s" href="https://www.mepsairquality.com/housekeeping">
         <img src="images/housekeeping-kitchen.jpg" alt="Housekeeper wiping a kitchen island counter">
         <h3>Housekeeping</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
     </div>
-    <div class="svc-cta">
+    <div class="svc-cta rv">
       <p>Not sure which service you need? Give us a call or email us.</p>
       <a class="pill pill-navy" href="https://www.mepsairquality.com/contact">Request a quote</a>
     </div>
@@ -425,27 +515,27 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
     <span class="tag">Serving Alberta, Saskatchewan and British Columbia</span>
   </div>
   <div class="why-body">
-    <h2>Why choose us</h2>
-    <p class="lead">For over two decades, MEPS Air Quality has delivered quality duct and furnace cleaning and built a reputation for being:</p>
-    <ul class="traits"><li>Reliable</li><li>Professional</li><li>Punctual</li><li>Efficient</li></ul>
+    <h2 class="rv">Why choose us</h2>
+    <p class="lead rv" style="--d:.1s">For over two decades, MEPS Air Quality has delivered quality duct and furnace cleaning and built a reputation for being:</p>
+    <ul class="traits rv" style="--d:.2s"><li>Reliable</li><li>Professional</li><li>Punctual</li><li>Efficient</li></ul>
     <h3>You can rely on us for cleaning your</h3>
     <ul class="cleanlist">
-      <li>Furnace</li><li>Ducts</li><li>Fireplace</li><li>Chimney</li><li>Air conditioner</li><li>HVAC system</li><li>Dryer vent</li><li>Central vacuum</li><li>Bathroom exhaust fan</li><li>Carpet and upholstery</li>
+      <li style="--i:0">Furnace</li><li style="--i:1">Ducts</li><li style="--i:2">Fireplace</li><li style="--i:3">Chimney</li><li style="--i:4">Air conditioner</li><li style="--i:5">HVAC system</li><li style="--i:6">Dryer vent</li><li style="--i:7">Central vacuum</li><li style="--i:8">Bathroom exhaust fan</li><li style="--i:9">Carpet and upholstery</li>
     </ul>
-    <div class="pledge"><b>100%</b><p>focused on customer satisfaction. A fully trained, licensed technician installs, maintains and cleans your HVAC system properly.</p></div>
+    <div class="pledge rv rv-s"><b><span data-count="100">100</span>%</b><p>focused on customer satisfaction. A fully trained, licensed technician installs, maintains and cleans your HVAC system properly.</p></div>
   </div>
 </section>
 
 <section class="review">
   <div class="wrap">
-    <figure class="review-img">
+    <figure class="review-img rv rv-l">
       <img src="images/meps-team-truck.jpg" alt="The MEPS Air Quality team beside their service truck">
       <figcaption>The MEPS Air Quality team</figcaption>
     </figure>
     <div>
       <small>Our happy clients</small>
-      <h2>Read what our customers say about our services</h2>
-      <blockquote>
+      <h2 class="rv">Read what our customers say about our services</h2>
+      <blockquote class="rv rv-r" style="--d:.15s">
         <p>Great service! The techs were awesome and friendly. They explained what they were going to do, showed me what was in my ducts and bonus they came a half hour early and were super quick. Would recommend to anyone.</p>
         <cite>Samantha M.</cite>
       </blockquote>
@@ -455,7 +545,7 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 
 <section class="band" id="contact">
   <div class="wrap">
-    <div class="band-card">
+    <div class="band-card rv rv-s">
       <svg class="swirl" viewBox="0 0 400 220" aria-hidden="true"><path d="M10 150C80 30 170 20 210 90s130 70 180-50" stroke-width="38"/><path d="M10 205C80 100 170 90 210 150s130 60 180-40" stroke-width="28"/></svg>
       <div style="position:relative">
         <p class="k">We are only a phone call away</p>
@@ -468,10 +558,10 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
       </div>
     </div>
     <div class="info">
-      <div><h3>Address</h3><p>9820 44 Ave NW, Edmonton, AB T6E 5E5</p></div>
-      <div><h3>Email</h3><p><a href="mailto:infos@mepsairquality.com">infos@mepsairquality.com</a></p></div>
-      <div><h3>Hours</h3><p class="hrs"><span>Mon to Sat</span>7 AM to 7 PM<span>Sunday</span>7 AM to 5 PM</p></div>
-      <div><h3>Service area</h3><p>Alberta, Saskatchewan and British Columbia</p></div>
+      <div class="rv" style="--d:0.00s"><h3>Address</h3><p>9820 44 Ave NW, Edmonton, AB T6E 5E5</p></div>
+      <div class="rv" style="--d:0.08s"><h3>Email</h3><p><a href="mailto:infos@mepsairquality.com">infos@mepsairquality.com</a></p></div>
+      <div class="rv" style="--d:0.16s"><h3>Hours</h3><p class="hrs"><span>Mon to Sat</span>7 AM to 7 PM<span>Sunday</span>7 AM to 5 PM</p></div>
+      <div class="rv" style="--d:0.24s"><h3>Service area</h3><p>Alberta, Saskatchewan and British Columbia</p></div>
     </div>
   </div>
 </section>
@@ -526,6 +616,36 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 <div class="mbar"><a href="tel:+17803943833">Call now</a><a href="https://www.mepsairquality.com/book-online">Book online</a></div>
 
 <script>
+(function(){
+  var hdr=document.querySelector('.hdr');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.rv,.cleanlist');
+  function count(el){
+    var end=+el.dataset.count,t0=null;
+    if(reduce){el.textContent=end;return}
+    function f(t){if(!t0)t0=t;var p=Math.min((t-t0)/1400,1);el.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}
+    requestAnimationFrame(f);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('in');
+        e.target.querySelectorAll('[data-count]').forEach(count);
+        io.unobserve(e.target);}
+    })},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(el){io.observe(el)});
+  }else{els.forEach(function(el){el.classList.add('in')})}
+  var why=document.querySelector('.why-img img'),rev=document.querySelector('.review-img img');
+  function onScroll(){
+    hdr.classList.toggle('scrolled',window.scrollY>40);
+    if(reduce)return;
+    [[why,.12]].forEach(function(a){
+      if(!a[0])return;var r=a[0].parentNode.getBoundingClientRect();
+      var c=(r.top+r.height/2-window.innerHeight/2);
+      a[0].style.transform='translateY('+(-c*a[1])+'px)';
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
 (function(){
   var b=document.querySelector('.burger'),n=document.getElementById('nav');
   b.addEventListener('click',function(){var o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu');});
