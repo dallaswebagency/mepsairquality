@@ -136,10 +136,14 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
 .t-a{grid-column:span 7;grid-row:span 2}
 .t-a h3{font-size:clamp(32px,3.4vw,50px)}
 .t-b{grid-column:span 5}
-.t-b h3,.t-c h3{font-size:clamp(22px,1.9vw,28px)}
-.t-b.photo::after,.t-c.photo::after{background:linear-gradient(0deg,rgba(8,36,63,.92) 0%,rgba(8,36,63,.45) 38%,rgba(8,36,63,0) 62%)}
+.t-b h3,.t-c h3,.t-d h3,.t-e h3,.t-f h3{font-size:clamp(22px,1.9vw,28px)}
+.t-b.photo::after,.t-c.photo::after,.t-d.photo::after,.t-e.photo::after,.t-f.photo::after{background:linear-gradient(0deg,rgba(8,36,63,.92) 0%,rgba(8,36,63,.45) 38%,rgba(8,36,63,0) 62%)}
 .t-c{grid-column:span 5}
 .t-d,.t-e,.t-f{grid-column:span 4}
+.t-d img{object-position:50% 40%}
+.t-e img{object-position:40% 35%}
+.t-f img{object-position:40% 30%}
+.t-b img{object-position:70% 50%}
 .plain{background:var(--ice);color:var(--navy)}
 .plain .more{background:var(--navy);color:#fff}
 .plain.navy{background:var(--navy);color:#fff}
@@ -383,7 +387,7 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
       <a class="tile photo t-b" href="https://www.mepsairquality.com/hvac">
-        <img src="images/crew-van-winter.jpg" alt="MEPS crew standing beside a service van in a commercial lot">
+        <img src="images/commercial-rooftop-ducts.jpg" alt="Technicians inspecting large rooftop ductwork on a commercial building">
         <h3>Commercial HVAC cleaning</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
@@ -392,18 +396,18 @@ h1,h2,h3{font-family:var(--display);margin:0;line-height:1.02;letter-spacing:-.0
         <h3>Dryer vent and central vac</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile plain navy t-d" href="https://www.mepsairquality.com/installations">
-        <svg class="flow" viewBox="0 0 220 120" aria-hidden="true"><path d="M10 70C50 10 95 8 118 45s70 40 95-10" stroke="#0975B8" stroke-width="16"/><path d="M10 106C50 52 95 48 118 80s70 34 95-6" stroke="#D42028" stroke-width="12"/></svg>
+      <a class="tile photo t-d" href="https://www.mepsairquality.com/installations">
+        <img src="images/furnace-installation.jpg" alt="Technician installing a new furnace in a basement">
         <h3>HVAC installation</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile plain blue t-e" href="https://www.mepsairquality.com/carpet-upholstery-cleaning">
-        <svg class="flow" viewBox="0 0 220 120" aria-hidden="true"><path d="M10 70C50 10 95 8 118 45s70 40 95-10" stroke="#5FB4E8" stroke-width="16"/><path d="M10 106C50 52 95 48 118 80s70 34 95-6" stroke="#fff" stroke-width="12" opacity=".55"/></svg>
+      <a class="tile photo t-e" href="https://www.mepsairquality.com/carpet-upholstery-cleaning">
+        <img src="images/carpet-steam-cleaning.jpg" alt="Technician steam cleaning a living room carpet">
         <h3>Carpet and upholstery cleaning</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
-      <a class="tile plain t-f" href="https://www.mepsairquality.com/housekeeping">
-        <svg class="flow" viewBox="0 0 220 120" aria-hidden="true"><path d="M10 70C50 10 95 8 118 45s70 40 95-10" stroke="#BFD9EC" stroke-width="16"/><path d="M10 106C50 52 95 48 118 80s70 34 95-6" stroke="#F3B9BC" stroke-width="12"/></svg>
+      <a class="tile photo t-f" href="https://www.mepsairquality.com/housekeeping">
+        <img src="images/housekeeping-kitchen.jpg" alt="Housekeeper wiping a kitchen island counter">
         <h3>Housekeeping</h3>
         <span class="more">Learn more <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
       </a>
